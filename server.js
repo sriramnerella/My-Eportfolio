@@ -14,8 +14,7 @@ const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
 const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || bcrypt.hashSync('portfolio123', 10);
 
 // MongoDB Connection
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/portfolio';
-
+const MONGO_URI = process.env.MONGO_URI 
 // Mongoose Schema for Contact Messages
 const contactMessageSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
