@@ -1,0 +1,128 @@
+<%- include('partials/header') %>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h1 class="display-4 fw-bold">Projects & Work Experience</h1>
+            <p class="lead text-muted">A showcase of my technical projects and accomplishments</p>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="projectSearch" class="form-label">
+                                <i class="fas fa-search me-2"></i>Search Projects
+                            </label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="projectSearch" 
+                                   placeholder="Search by title or description...">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="techFilter" class="form-label">
+                                <i class="fas fa-filter me-2"></i>Filter by Technology
+                            </label>
+                            <select class="form-select" id="techFilter">
+                                <option value="">All Technologies</option>
+                                <option value="React">React</option>
+                                <option value="Node.js">Node.js</option>
+                                <option value="Vue.js">Vue.js</option>
+                                <option value="Express">Express</option>
+                                <option value="MongoDB">MongoDB</option>
+                                <option value="PostgreSQL">PostgreSQL</option>
+                                <option value="Python">Python</option>
+                                <option value="Flask">Flask</option>
+                                <option value="AWS">AWS</option>
+                                <option value="Socket.io">Socket.io</option>
+                                <option value="Stripe API">Stripe API</option>
+                                <option value="D3.js">D3.js</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">
+                                <i class="fas fa-redo me-2"></i>Actions
+                            </label>
+                            <div>
+                                <button type="button" class="btn btn-outline-secondary w-100" id="clearFilters">
+                                    Clear Filters
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div id="projectStats" class="text-muted small">
+                                Showing <span id="visibleCount"><%= data.projects.length %></span> of 
+                                <span id="totalCount"><%= data.projects.length %></span> projects
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="projectsContainer">
+        <% data.projects.forEach((project, index) => { %>
+        <div class="col-lg-4 col-md-6 mb-4 project-item" 
+             data-title="<%= project.title.toLowerCase() %>"
+             data-description="<%= project.description.toLowerCase() %>"
+             data-techstack="<%= project.techStack.join(',').toLowerCase() %>">
+            <div class="card h-100 hover-card project-card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-project-diagram me-2"></i>
+                        <%= project.title %>
+                    </h5>
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <p class="card-text flex-grow-1"><%= project.description %></p>
+                    
+                    <div class="tech-stack mb-3">
+                        <h6 class="text-muted mb-2">
+                            <i class="fas fa-tools me-1"></i>Tech Stack:
+                        </h6>
+                        <div class="tech-tags">
+                            <% project.techStack.forEach(tech => { %>
+                            <span class="badge bg-secondary tech-tag"><%= tech %></span>
+                            <% }); %>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-auto">
+                        <a href="<%= project.link %>" target="_blank" class="btn btn-outline-primary w-100">
+                            <i class="fab fa-github me-2"></i>View Project
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+
+
+    <!-- Call to Action -->
+    <section class="mt-5 text-center">
+        <div class="card bg-light">
+            <div class="card-body py-5">
+                <h3 class="card-title mb-3">Interested in My Work?</h3>
+                <p class="card-text mb-4">Check out my achievements or get in touch to discuss potential collaborations</p>
+                <div>
+                    <a href="/achievements" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-trophy me-2"></i>View Achievements
+                    </a>
+                    <a href="/contact" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<%- include('partials/footer') %>

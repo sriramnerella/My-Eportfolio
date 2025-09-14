@@ -1,0 +1,101 @@
+<%- include('partials/header') %>
+
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="display-4 fw-bold mb-3">Hi, I'm <span class="text-primary ">NERELLA VENKATA SRIRAM</span></h1>
+                    <h2 class="h3 text-muted mb-4">Student | Web Development | AI & Data Science Enthusiast</h2>
+                    <p class="lead mb-4">Aspiring Full Stack Developer | AI & Data Science Enthusiast | Passionate about Building Innovative Solutions</p>
+                    
+                    <div class="hero-buttons mb-5">
+                        <a href="/projects" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-code me-2"></i>See Projects
+                        </a>
+                        <a href="/download-resume" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-download me-2"></i>Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-image text-center">
+                    <div class="profile-placeholder">
+                        <i class="fas fa-user-circle fa-15x text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-5">
+                        <h3 class="card-title text-center mb-4">
+                            <i class="fas fa-quote-left text-primary me-2"></i>
+                            Personal Reflection
+                        </h3>
+                        <p class="card-text lead text-center"><%= data.personal.statement %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5 fw-bold">Quick Overview</h2>
+                <p class="lead text-muted">Get to know me better</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 text-center hover-card">
+                    <div class="card-body">
+                        <i class="fas fa-graduation-cap fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Education</h5>
+                        <p class="card-text">Strong academic foundation in Computer Science with hands-on experience</p>
+                        <a href="/about" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center hover-card">
+                    <div class="card-body">
+                        <i class="fas fa-laptop-code fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Projects</h5>
+                        <p class="card-text">Innovative solutions built with modern technologies and best practices</p>
+                        <a href="/projects" class="btn btn-outline-primary">View Projects</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center hover-card">
+                    <div class="card-body">
+                        <i class="fas fa-trophy fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Achievements</h5>
+                        <p class="card-text">Recognition for academic excellence and technical contributions</p>
+                        <a href="/achievements" class="btn btn-outline-primary">See Achievements</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<% if (success) { %>
+<div class="alert alert-success alert-dismissible fade show position-fixed" style="top: 80px; right: 20px; z-index: 1050;">
+    <i class="fas fa-check-circle me-2"></i>Welcome! Feel free to explore my portfolio.
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+<% } %>
+
+<%- include('partials/footer') %>

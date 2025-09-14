@@ -1,0 +1,247 @@
+<%- include('partials/header') %>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h1 class="display-4 fw-bold">Get In Touch</h1>
+            <p class="lead text-muted">Let's discuss your project or explore collaboration opportunities</p>
+        </div>
+    </div>
+
+    <% if (success) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>
+        <strong>Success!</strong> Your message has been sent successfully. I'll get back to you soon!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } %>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i>
+        <strong>Error!</strong>
+        <% if (error === 'missing_fields') { %>
+            Please fill in all required fields.
+        <% } else if (error === 'invalid_email') { %>
+            Please enter a valid email address.
+        <% } else if (error === 'database_error') { %>
+            There was an error saving your message. Please try again later.
+        <% } else if (error === 'message_too_long') { %>
+            Your message is too long. Please keep it under 2000 characters.
+        <% } else { %>
+            An unexpected error occurred. Please try again.
+        <% } %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } %>
+
+    <div class="row">
+        <!-- Contact Form -->
+        <div class="col-lg-8 mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-envelope me-2"></i>Send Me a Message
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form action="/contact" method="POST" id="contactForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Full Name *</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="name" 
+                                       name="name" 
+                                       required 
+                                       minlength="2" 
+                                       maxlength="100"
+                                       pattern="[A-Za-z\s]+"
+                                       title="Please enter a valid name (letters and spaces only)">
+                                <div class="invalid-feedback">
+                                    Please provide a valid name (2-100 characters, letters and spaces only).
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" 
+                                       class="form-control" 
+                                       id="email" 
+                                       name="email" 
+                                       required
+                                       maxlength="254"
+                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                       title="Please enter a valid email address">
+                                <div class="invalid-feedback">
+                                    Please provide a valid email address.
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea class="form-control" 
+                                      id="message" 
+                                      name="message" 
+                                      rows="6" 
+                                      required 
+                                      minlength="10"
+                                      maxlength="2000"
+                                      placeholder="Tell me about your project, collaboration idea, or just say hello..."></textarea>
+                            <div class="invalid-feedback">
+                                Please provide a message (10-2000 characters).
+                            </div>
+                            <div class="valid-feedback">
+                                Great message!
+                            </div>
+                            <div class="form-text">
+                                <span id="charCount">0</span>/2000 characters
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-address-card me-2"></i>Contact Information
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="contact-info">
+                        <div class="contact-item mb-4">
+                            <h6 class="fw-bold">
+                                <i class="fas fa-envelope text-primary me-2"></i>Email
+                            </h6>
+                            <a href="mailto:<%= data.contact.email %>" class="text-decoration-none">
+                                <%= data.contact.email %>
+                            </a>
+                        </div>
+                        
+                        <div class="contact-item mb-4">
+                            <h6 class="fw-bold">
+                                <i class="fas fa-phone text-primary me-2"></i>Phone
+                            </h6>
+                            <a href="tel:<%= data.contact.phone %>" class="text-decoration-none">
+                                <%= data.contact.phone %>
+                            </a>
+                        </div>
+                        
+                        <div class="contact-item mb-4">
+                            <h6 class="fw-bold">
+                                <i class="fab fa-github text-primary me-2"></i>GitHub
+                            </h6>
+                            <a href="<%= data.contact.github %>" target="_blank" class="text-decoration-none">
+                                View My Repositories
+                            </a>
+                        </div>
+                        
+                        <div class="contact-item mb-4">
+                            <h6 class="fw-bold">
+                                <i class="fab fa-linkedin text-primary me-2"></i>LinkedIn
+                            </h6>
+                            <a href="<%= data.contact.linkedin %>" target="_blank" class="text-decoration-none">
+                                Connect With Me
+                            </a>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="response-time">
+                        <h6 class="fw-bold mb-3">
+                            <i class="fas fa-clock text-primary me-2"></i>Response Time
+                        </h6>
+                        <p class="text-muted small mb-0">
+                            I typically respond to emails within 24-48 hours. For urgent matters, 
+                            please mention it in your message subject.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media Links -->
+    <section class="mt-5">
+        <div class="card bg-gradient-primary text-white">
+            <div class="card-body py-4">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h4 class="mb-2">Let's Connect on Social Media</h4>
+                        <p class="mb-0">Follow me for updates on my latest projects and tech insights</p>
+                    </div>
+                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                        <div class="social-buttons">
+                            <a href="<%= data.contact.github %>" target="_blank" class="btn btn-light btn-sm me-2">
+                                <i class="fab fa-github me-1"></i>GitHub
+                            </a>
+                            <a href="<%= data.contact.linkedin %>" target="_blank" class="btn btn-light btn-sm">
+                                <i class="fab fa-linkedin me-1"></i>LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center mb-4">Frequently Asked Questions</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title text-primary">What services do you offer?</h6>
+                        <p class="card-text small">I specialize in full-stack web development, including frontend React/Vue.js applications, backend Node.js/Express APIs, and database design.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title text-primary">What's your preferred tech stack?</h6>
+                        <p class="card-text small">I work primarily with JavaScript/Node.js, React, Express, MongoDB/PostgreSQL, and cloud platforms like AWS.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title text-primary">Are you available for freelance work?</h6>
+                        <p class="card-text small">Yes! I'm open to freelance projects and collaborations. Feel free to reach out with your project details.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title text-primary">How do you handle project timelines?</h6>
+                        <p class="card-text small">I provide detailed project estimates and maintain regular communication throughout the development process.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<%- include('partials/footer') %>
